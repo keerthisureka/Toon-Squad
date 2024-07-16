@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Header />
-      <main className='pt-16'>
+      <main className='pt-20 bg-amber-300 min-h-[calc(100vh)]'>
         <Outlet />
       </main>
     </div>
