@@ -18,7 +18,7 @@ const Header = () => {
 
   const handleLogOut = () => {
     dispatch(logoutRedux());
-    toast("Logout successfully");
+    toast("Logged out successfully!");
   };
 
   return (

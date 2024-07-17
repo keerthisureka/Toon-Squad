@@ -34,7 +34,7 @@ const userModel = mongoose.model("user", userSchema);
 
 //api
 app.get("/", (req, res) => {
-  res.send("Server is running");
+  res.send("Server is running...");
 });
 
 //sign up
@@ -48,58 +48,81 @@ app.post("/signup", async (req, res) => {
     if (existingUser) {
       // Email already exists
       return res.send({
-        message: "Email id is already registered",
+        message: "Email id is already registered!",
         alert: false,
       });
     } else {
       // Create a new user if email does not exist
       const newUser = new userModel(req.body);
       await newUser.save();
-      return res.send({ message: "Successfully signed up", alert: true });
+      return res.send({ message: "Successfully signed up!", alert: true });
     }
   } catch (err) {
     console.log(err);
-    return res.status(500).send("An error occurred during signup.");
+    return res.status(500).send("An error occurred during signup!");
   }
 });
 
 //api login
 app.post("/login", async (req, res) => {
-    const { email } = req.body;
+  const { email } = req.body;
 
-    try {
-        // Find user by email
-        const result = await userModel.findOne({ email });
+  try {
+    // Find user by email
+    const result = await userModel.findOne({ email });
 
-        if (result) {
-            // Prepare data to send back (excluding sensitive info like passwords)
-            const dataSend = {
-                _id: result._id,
-                firstName: result.firstName,
-                lastName: result.lastName,
-                email: result.email,
-                image: result.image,
-            };
+    if (result) {
+      // Prepare data to send back (excluding sensitive info like passwords)
+      const dataSend = {
+        _id: result._id,
+        firstName: result.firstName,
+        lastName: result.lastName,
+        email: result.email,
+        image: result.image,
+      };
 
-            // Send success response
-            return res.send({
-                message: "Login is successful",
-                alert: true,
-                data: dataSend,
-            });
-        } else {
-            // Send failure response
-            return res.send({
-                message: "Email is not registered, please sign up",
-                alert: false,
-            });
-        }
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send("An error occurred during login.");
+      // Send success response
+      return res.send({
+        message: "Login is successful!",
+        alert: true,
+        data: dataSend,
+      });
+    } else {
+      // Send failure response
+      return res.send({
+        message: "Email is not registered, please sign up!",
+        alert: false,
+      });
     }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("An error occurred during login!");
+  }
 });
 
+// Product section
+const schemaProduct = mongoose.Schema({
+  name: String,
+  category: String,
+  image: String,
+  price: String,
+});
+const productModel = mongoose.model("product", schemaProduct);
+
+// Save product in data
+// api
+app.post("/uploadProduct", async (req, res) => {
+  // console.log(req.body)
+  const data = await productModel(req.body);
+  const datasave = await data.save();
+  res.send({ message: "Upload successful!" });
+});
+
+//
+app.get("/product", async (req, res) => {
+  const data = await productModel.find({});
+  res.send(JSON.stringify(data));
+});
 
 //server is ruuning
-app.listen(PORT, () => console.log("server is running at port : " + PORT));
+app.listen(PORT, () => console.log("Server is running at port : " + PORT));
