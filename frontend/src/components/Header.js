@@ -11,16 +11,16 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userData = useSelector((state) => state.user);
   console.log(userData);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
   };
 
-  const handleLogOut = () =>{
-    dispatch(logoutRedux())
-    toast("Logout successfully")
-  }
-  
+  const handleLogOut = () => {
+    dispatch(logoutRedux());
+    toast("Logout successfully");
+  };
+
   return (
     <header className="fixed shadow-md w-full h-20 px-2 md:px-4 z-50 bg-black">
       {/* desktop */}
@@ -50,20 +50,35 @@ const Header = () => {
             </div>
             {showMenu && (
               <div className="absolute right-2 bg-white py-2 shadow drop-shadow-md rounded flex flex-col">
-                {
-                  userData.email === process.env.REACT_APP_ADMIN_EMAIL && (
+                {userData.email === process.env.REACT_APP_ADMIN_EMAIL && (
                   <Link
-                      to={"newproduct"}
-                      className="whitespace-nowrap text-black cursor-pointer px-3"
-                    >
-                      New product
+                    to={"newproduct"}
+                    className="whitespace-nowrap text-black cursor-pointer px-3"
+                  >
+                    New product
                   </Link>
                 )}
-                <Link to={"signup"} className="whitespace-nowrap text-black cursor-pointer px-3">Sign Up</Link>
-                {
-                  userData.firstName ? <p className="cursor-pointer whitespace-nowrap text-black px-3" onClick={handleLogOut} >Logout</p> : <Link to={"login"} className="cursor-pointer whitespace-nowrap text-black px-3">Login</Link>
-                }
-                
+                <Link
+                  to={"signup"}
+                  className="whitespace-nowrap text-black cursor-pointer px-3"
+                >
+                  Sign Up
+                </Link>
+                {userData.firstName ? (
+                  <p
+                    className="cursor-pointer whitespace-nowrap text-black px-3"
+                    onClick={handleLogOut}
+                  >
+                    Logout
+                  </p>
+                ) : (
+                  <Link
+                    to={"login"}
+                    className="cursor-pointer whitespace-nowrap text-black px-3"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             )}
           </div>
