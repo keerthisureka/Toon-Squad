@@ -91,20 +91,20 @@ const Newproduct = () => {
           onChange={handleOnChange}
           value={data.category}
         >
-          <option value={"other"}>Select Category</option>
-          <option value={"indianchaat"}>Indian Chaat</option>
-          <option value={"tandoorstarters"}>Tandoor Starters</option>
-          <option value={"chinese"}>Chinese</option>
-          <option value={"maincourse"}>Main Course</option>
-          <option value={"indiancombo"}>Indian Combo</option>
-          <option value={"breads"}>Breads</option>
-          <option value={"tandooriparathas"}>Tandoori Parathas</option>
-          <option value={"rice"}>Rice</option>
-          <option value={"thali"}>Thali</option>
-          <option value={"beverages"}>Beverages</option>
-          <option value={"raitas"}>Raitas</option>
-          <option value={"salads"}>Salads</option>
-          <option value={"papad"}>Papad</option>
+          <option value={"Other"}>Select Category</option>
+          <option value={"Indian Chaat"}>Indian Chaat</option>
+          <option value={"Tandoor Starters"}>Tandoor Starters</option>
+          <option value={"Chinese"}>Chinese</option>
+          <option value={"Main Course"}>Main Course</option>
+          <option value={"Indian Combo"}>Indian Combo</option>
+          <option value={"Breads"}>Breads</option>
+          <option value={"Tandoori Parathas"}>Tandoori Parathas</option>
+          <option value={"Rice"}>Rice</option>
+          <option value={"Thali"}>Thali</option>
+          <option value={"Beverages"}>Beverages</option>
+          <option value={"Raitas"}>Raitas</option>
+          <option value={"Salads"}>Salads</option>
+          <option value={"Papad"}>Papad</option>
         </select>
 
         <label htmlFor="image" className="text-white mt-2">
