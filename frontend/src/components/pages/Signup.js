@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BiShow, BiHide } from "react-icons/bi";
+import { toast } from "react-hot-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -31,14 +32,29 @@ const Signup = () => {
   const handleShowConfirmPassword = () => {
     setShowConfirmPassword((preve) => !preve);
   };
-
-  const handleSubmit = (e) => {
+console.log(process.env.REACT_APP_SERVER_DOMAIN)
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const { firstName, email, password, confirmPassword } = data;
     if (firstName && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        alert("Successful!");
-        navigate("/login");
+        const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/signup`, {
+          method : "POST",
+          headers : {
+            "content-type" : "application/json"
+          },
+          body : JSON.stringify(data)
+        })
+
+        const dataRes = await fetchData.json()
+        console.log(dataRes)
+
+        // alert(dataRes.message);
+        toast(dataRes.message)
+        if(dataRes.alert){
+          navigate("/login");
+        }
+        
       } else {
         alert("Password and Confirm Password are not equal!");
       }
