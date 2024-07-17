@@ -58,18 +58,18 @@ const Header = () => {
                     New product
                   </Link>
                 )}
-                <Link
+                {/* <Link
                   to={"signup"}
                   className="whitespace-nowrap text-black cursor-pointer px-3"
                 >
                   Sign Up
-                </Link>
+                </Link> */}
                 {userData.firstName ? (
                   <p
                     className="cursor-pointer whitespace-nowrap text-black px-3"
                     onClick={handleLogOut}
                   >
-                    Logout
+                    Logout ({userData.firstName})
                   </p>
                 ) : (
                   <Link
