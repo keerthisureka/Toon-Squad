@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import HomeCard from "../HomeCard";
 import CardFeature from "../CardFeature";
 import { GrPrevious, GrNext } from "react-icons/gr";
+import FilterProduct from "../FilterProduct";
+
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
@@ -15,6 +17,37 @@ const Home = () => {
   console.log(homeProductCartListindianchaat);
 
   const loadingArray = new Array(4).fill(null);
+  const loadingArrayFeature = new Array(10).fill(null);
+
+  const slideProductRef = useRef();
+  const nextProduct = () => {
+    slideProductRef.current.scrollLeft += 250;
+  };
+
+  const preveProduct = () => {
+    slideProductRef.current.scrollLeft -= 250;
+  };
+
+  const categoryList = [...new Set(productData.map(el => el.category))]
+  console.log(categoryList)
+  
+  //filter data display
+  const[filterby, setFilterBy] = useState("")
+  const[dataFilter, setDataFilter] = useState([])
+
+  useEffect(() => {
+    setDataFilter(productData)
+  }, [productData])
+
+  const handleFilterProduct = (category) => {
+    const filter = productData.filter(el => el.category.toLowerCase() === category.toLowerCase())
+    setDataFilter(() =>{
+      return[
+        ...filter
+      ]
+    })
+  }
+
   return (
     <div className="p-2 md:p-4">
       <div className="md:flex gap-4 p-2">
@@ -52,28 +85,75 @@ const Home = () => {
           <h2 className="font-bold text-2xl text-black mb-4">Indian Chaat</h2>
 
           <div className="ml-auto flex gap-4">
-            <button className="bg-white text-lg p-1 rounded-full">
+            <button
+              onClick={preveProduct}
+              className="bg-white text-lg p-1 rounded-full"
+            >
               <GrPrevious />
             </button>
-            <button className="bg-white text-lg p-1 rounded-full">
+            <button
+              onClick={nextProduct}
+              className="bg-white text-lg p-1 rounded-full"
+            >
               <GrNext />
             </button>
           </div>
         </div>
-        <div className="flex gap-5 overflow-scroll">
-          {homeProductCartListindianchaat.map((el) => {
-            return (
-              <CardFeature
-                key={el._id}
-                name={el.name}
-                category={el.category}
-                price={el.price}
-                image={el.image}
-              />
-            );
-          })}
+        <div
+          className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all"
+          ref={slideProductRef}
+        >
+          {homeProductCartListindianchaat[0]
+            ? homeProductCartListindianchaat.map((el) => {
+                return (
+                  <CardFeature
+                    key={el._id}
+                    id={el._id}
+                    name={el.name}
+                    category={el.category}
+                    price={el.price}
+                    image={el.image}
+                  />
+                );
+              })
+            : loadingArrayFeature.map((el) => (
+                <CardFeature loading="Loading..." />
+              ))}
         </div>
       </div>
+
+      <div className="my-5">
+        <h2 className="font-bold text-2xl text-black mb-4">Our Products</h2>
+      </div>
+
+      <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
+        {
+          categoryList[0] && categoryList.map(el => {
+            return (
+              <FilterProduct category={el} onClick={()=>handleFilterProduct(el)}/>
+            )
+          })
+        }
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-4 my-4">
+          {
+            dataFilter.map(el => {
+              return (
+                <CardFeature
+                  key={el._id}
+                  id={el._id}
+                  image={el.image}
+                  name={el.name}
+                  category={el.category}
+                  price={el.price}
+                
+                />
+              )
+            })
+          }
+      </div>
+
     </div>
   );
 };

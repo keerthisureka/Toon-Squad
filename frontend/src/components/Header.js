@@ -32,9 +32,9 @@ const Header = () => {
         </Link>
 
         <div className="flex items-center gap-4 md:gap-7">
-          <nav className="flex gap-4 md:gap-6 text-base md:text-lg">
+          <nav className="flex gap-4 md:gap-6 md:text-lg hidden md:flex">
             <Link to={""}>Home</Link>
-            <Link to={"menu"}>Menu</Link>
+            <Link to={"menu/6697d1716d9f88a8a0c62330"}>Menu</Link>
             <Link to={"about"}>About</Link>
             <Link to={"contact"}>Contact</Link>
           </nav>
@@ -49,7 +49,7 @@ const Header = () => {
               <FaCircleUser />
             </div>
             {showMenu && (
-              <div className="absolute right-2 bg-white py-2 shadow drop-shadow-md rounded flex flex-col">
+              <div className="absolute right-2 bg-white py-2 shadow drop-shadow-md rounded flex flex-col min-w-[120px] text-center">
                 {userData.email === process.env.REACT_APP_ADMIN_EMAIL && (
                   <Link
                     to={"newproduct"}
@@ -79,6 +79,14 @@ const Header = () => {
                     Login
                   </Link>
                 )}
+
+              <nav className="text-base md:text-lg flex flex-col text-black md:hidden">
+                <Link to={""}  className="px-2 py-1">Home</Link>
+                <Link to={"menu/6697d1716d9f88a8a0c62330"} className="px-2 py-1">Menu</Link>
+                <Link to={"about"} className="px-2 py-1">About</Link>
+                <Link to={"contact"} className="px-2 py-1">Contact</Link>
+              </nav>
+
               </div>
             )}
           </div>
