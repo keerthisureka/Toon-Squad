@@ -4,6 +4,7 @@ import HomeCard from "../HomeCard";
 import CardFeature from "../CardFeature";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import FilterProduct from "../FilterProduct";
+import AllProduct from "../AllProduct";
 
 
 const Home = () => {
@@ -28,25 +29,9 @@ const Home = () => {
     slideProductRef.current.scrollLeft -= 250;
   };
 
-  const categoryList = [...new Set(productData.map(el => el.category))]
-  console.log(categoryList)
+
   
-  //filter data display
-  const[filterby, setFilterBy] = useState("")
-  const[dataFilter, setDataFilter] = useState([])
 
-  useEffect(() => {
-    setDataFilter(productData)
-  }, [productData])
-
-  const handleFilterProduct = (category) => {
-    const filter = productData.filter(el => el.category.toLowerCase() === category.toLowerCase())
-    setDataFilter(() =>{
-      return[
-        ...filter
-      ]
-    })
-  }
 
   return (
     <div className="p-2 md:p-4">
@@ -67,6 +52,7 @@ const Home = () => {
                 return (
                   <HomeCard
                     key={el._id}
+                    id={el._id}
                     image={el.image}
                     name={el.name}
                     price={el.price}
@@ -122,37 +108,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="my-5">
-        <h2 className="font-bold text-2xl text-black mb-4">Our Products</h2>
-      </div>
-
-      <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
-        {
-          categoryList[0] && categoryList.map(el => {
-            return (
-              <FilterProduct category={el} onClick={()=>handleFilterProduct(el)}/>
-            )
-          })
-        }
-      </div>
-
-      <div className="flex flex-wrap justify-center gap-4 my-4">
-          {
-            dataFilter.map(el => {
-              return (
-                <CardFeature
-                  key={el._id}
-                  id={el._id}
-                  image={el.image}
-                  name={el.name}
-                  category={el.category}
-                  price={el.price}
-                
-                />
-              )
-            })
-          }
-      </div>
+      <AllProduct heading={"Our Products"}/>
 
     </div>
   );

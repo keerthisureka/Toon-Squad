@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import AllProduct from '../AllProduct'
 
 const Menu = () => {
   const { filterby } = useParams()
@@ -29,6 +30,8 @@ const Menu = () => {
           </div>
         </div>
       </div>
+
+      <AllProduct heading={"Related Products"}/>
     </div>
   )
 }

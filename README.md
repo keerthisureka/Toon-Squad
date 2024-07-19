@@ -13,3 +13,4 @@ Important timelines:
 - 05:14 - add new products completed
 - 05:33 - home page
 - 06:26 - scrollbar
+- 07:39 - cart
