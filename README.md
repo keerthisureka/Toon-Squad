@@ -14,3 +14,4 @@ Important timelines:
 - 05:33 - home page
 - 06:26 - scrollbar
 - 07:39 - cart
+- 08:10 - add to cart

@@ -21,6 +21,7 @@ const Header = () => {
     toast("Logged out successfully!");
   };
 
+  const cartItemNumber = useSelector((state) => state.product.cartItem)
   return (
     <header className="fixed shadow-md w-full h-20 px-2 md:px-4 z-50 bg-black">
       {/* desktop */}
@@ -39,10 +40,12 @@ const Header = () => {
             <Link to={"contact"}>Contact</Link>
           </nav>
           <div className="text-2xl text-white relative">
-            <FaCartShopping />
-            <div className="absolute -top-1 -right-1 text-black bg-white h-4 w-4 rounded-full m-0 p-0 text-sm text-center">
-              0
-            </div>
+            <Link to={"cart"}>
+              <FaCartShopping />
+              <div className="absolute -top-1 -right-1 text-black bg-white h-4 w-4 rounded-full m-0 p-0 text-sm text-center">
+                {cartItemNumber.length}
+              </div>
+            </Link>
           </div>
           <div className="text-white cursor-pointer" onClick={handleShowMenu}>
             <div className="text-3xl">
@@ -80,13 +83,23 @@ const Header = () => {
                   </Link>
                 )}
 
-              <nav className="text-base md:text-lg flex flex-col text-black md:hidden">
-                <Link to={""}  className="px-2 py-1">Home</Link>
-                <Link to={"menu/6697d1716d9f88a8a0c62330"} className="px-2 py-1">Menu</Link>
-                <Link to={"about"} className="px-2 py-1">About</Link>
-                <Link to={"contact"} className="px-2 py-1">Contact</Link>
-              </nav>
-
+                <nav className="text-base md:text-lg flex flex-col text-black md:hidden">
+                  <Link to={""} className="px-2 py-1">
+                    Home
+                  </Link>
+                  <Link
+                    to={"menu/6697d1716d9f88a8a0c62330"}
+                    className="px-2 py-1"
+                  >
+                    Menu
+                  </Link>
+                  <Link to={"about"} className="px-2 py-1">
+                    About
+                  </Link>
+                  <Link to={"contact"} className="px-2 py-1">
+                    Contact
+                  </Link>
+                </nav>
               </div>
             )}
           </div>

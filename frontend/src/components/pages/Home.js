@@ -9,14 +9,11 @@ import AllProduct from "../AllProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
-  console.log(productData);
   const homeProductCartList = productData.slice(0, 4);
   const homeProductCartListindianchaat = productData.filter(
     (el) => el.category === "Indian Chaat",
     []
   );
-  console.log(homeProductCartListindianchaat);
-
   const loadingArray = new Array(4).fill(null);
   const loadingArrayFeature = new Array(10).fill(null);
 
@@ -61,7 +58,7 @@ const Home = () => {
                 );
               })
             : loadingArray.map((el, index) => {
-                return <HomeCard key={index} loading={"Loading..."} />;
+                return <HomeCard key={index + "loading"} loading={"Loading..."} />;
               })}
         </div>
       </div>
@@ -93,7 +90,7 @@ const Home = () => {
             ? homeProductCartListindianchaat.map((el) => {
                 return (
                   <CardFeature
-                    key={el._id}
+                    key={el._id + "Indian Chaat"}
                     id={el._id}
                     name={el.name}
                     category={el.category}
@@ -102,8 +99,8 @@ const Home = () => {
                   />
                 );
               })
-            : loadingArrayFeature.map((el) => (
-                <CardFeature loading="Loading..." />
+            : loadingArrayFeature.map((el, index) => (
+                <CardFeature loading="Loading..." key={index + "cartLoading"} />
               ))}
         </div>
       </div>
