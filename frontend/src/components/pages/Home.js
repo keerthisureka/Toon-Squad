@@ -6,7 +6,6 @@ import { GrPrevious, GrNext } from "react-icons/gr";
 import FilterProduct from "../FilterProduct";
 import AllProduct from "../AllProduct";
 
-
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
   const homeProductCartList = productData.slice(0, 4);
@@ -25,10 +24,6 @@ const Home = () => {
   const preveProduct = () => {
     slideProductRef.current.scrollLeft -= 250;
   };
-
-
-  
-
 
   return (
     <div className="p-2 md:p-4">
@@ -58,7 +53,9 @@ const Home = () => {
                 );
               })
             : loadingArray.map((el, index) => {
-                return <HomeCard key={index + "loading"} loading={"Loading..."} />;
+                return (
+                  <HomeCard key={index + "loading"} loading={"Loading..."} />
+                );
               })}
         </div>
       </div>
@@ -105,8 +102,7 @@ const Home = () => {
         </div>
       </div>
 
-      <AllProduct heading={"Our Products"}/>
-
+      <AllProduct heading={"Our Products"} />
     </div>
   );
 };

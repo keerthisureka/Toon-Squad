@@ -15,3 +15,4 @@ Important timelines:
 - 06:26 - scrollbar
 - 07:39 - cart
 - 08:10 - add to cart
+- 09:26 - done
