@@ -1,7 +1,10 @@
 # Toon-Squad
 
-To run frontend:
+- To run frontend:
 `npm start`
+
+- To run backend:
+`npm run dev`
 
 Important timelines:
 
