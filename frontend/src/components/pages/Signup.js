@@ -15,7 +15,7 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
-  console.log(data);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((preve) => {
@@ -50,7 +50,6 @@ const Signup = () => {
         );
 
         const dataRes = await fetchData.json();
-        console.log(dataRes);
 
         // alert(dataRes.message);
         toast(dataRes.message);

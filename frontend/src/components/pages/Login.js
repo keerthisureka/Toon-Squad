@@ -49,7 +49,6 @@ const Login = () => {
       );
 
       const dataRes = await fetchData.json();
-      console.log(dataRes);
 
       toast(dataRes.message);
 
@@ -59,7 +58,6 @@ const Login = () => {
           navigate("/");
         }, 1000);
       }
-      console.log(userData);
     } else {
       alert("Please enter required fields!");
     }

@@ -1,21 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AllProduct from "../AllProduct";
 import { addCartItem } from "../../redux/productSlice";
 
 const Menu = () => {
   const { filterby } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const productData = useSelector((state) => state.product.productList);
 
   const productDisplay = productData.filter((el) => el._id === filterby)[0];
-  console.log(productDisplay);
 
   const handleAddCartProduct = (e) => {
     dispatch(addCartItem(productDisplay));
   };
-
+  const handleBuy = () => {
+    dispatch(addCartItem(productDisplay));
+    navigate("/cart");
+  };
   return (
     <div className="p-2 md:p-4">
       <div className="w-full max-w-2xl m-auto flex flex-col md:flex-row bg-white justify-center items-center rounded-xl">
@@ -33,7 +36,10 @@ const Menu = () => {
             ₹ {productDisplay.price}
           </p>
           <div className="flex gap-3">
-            <button className="bg-amber-400 mt-3 mb-3 hover:bg-amber-500 min-w-[150px] h-10 rounded-full">
+            <button
+              className="bg-amber-400 mt-3 mb-3 hover:bg-amber-500 min-w-[150px] h-10 rounded-full"
+              onClick={handleBuy}
+            >
               Buy
             </button>
             <button
