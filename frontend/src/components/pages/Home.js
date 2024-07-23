@@ -7,6 +7,13 @@ import FilterProduct from "../FilterProduct";
 import AllProduct from "../AllProduct";
 
 const Home = () => {
+  const scrollToRef = useRef(null);
+
+  const handleScroll = () => {
+    scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+
   const productData = useSelector((state) => state.product.productList);
   const homeProductCartList = productData.slice(0, 4);
   const homeProductCartListindianchaat = productData.filter(
@@ -34,8 +41,8 @@ const Home = () => {
             <span className="text-black text-4xl md:text-8xl">!</span>
           </h2>
           <p className="mt-2 p-1">Random description about the company.</p>
-          <button className="mt-2 px-4 py-2 bg-black text-white font-medium rounded-full">
-            Order Now
+          <button className="mt-2 px-4 py-2 bg-black text-white font-medium rounded-full" onClick={handleScroll}>
+            Order Now {">>"}
           </button>
         </div>
         <div className="md:w-1/2 flex flex-wrap p-4 gap-5 justify-center">
@@ -101,8 +108,9 @@ const Home = () => {
               ))}
         </div>
       </div>
-
-      <AllProduct heading={"Our Products"} />
+      <div ref={scrollToRef} >
+        <AllProduct heading={"Our Products"} />
+      </div>
     </div>
   );
 };
