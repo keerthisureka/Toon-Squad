@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import restaurant from "../../assets/restaurant.jpg";
+import counter from "../../assets/counter.jpg";
+import dining from "../../assets/dining.jpg";
 
 const About = () => {
   return (
@@ -8,8 +11,8 @@ const About = () => {
         U.P Wala: A Taste of North India
         <span className="text-black text-4xl md:text-8xl">!</span>
       </h2>
-      <div className="md:flex gap-4 p-2">
-        <div className="md:w-2/3">
+      <div className="md:flex gap-2 p-2">
+        <div className="md:w-1/2">
           <p className="mt-4 p-2 md:text-xl text-lg text-justify">
             U P Wala restaurant with branches in AECS Layout, Brookefield and
             Whitefield, Bangalore, offers a delightful selection of North
@@ -35,8 +38,10 @@ const About = () => {
           </div>
         </div>
 
-        <div>
-          <img src="" />
+        <div className="md:w-1/2 flex flex-wrap gap-5 p-2 justify-center">
+          <img src={restaurant} alt="restaurant" className="md:w-[300px] w-[400px]" />
+          <img src={counter} alt="counter" className="md:w-[300px] w-[400px]" />
+          <img src={dining} alt="dining" className="md:w-[300px] w-[400px]" />
         </div>
       </div>
     </div>
